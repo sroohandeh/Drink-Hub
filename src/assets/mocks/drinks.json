@@ -1,0 +1,32 @@
+[
+  {
+    "id": "1",
+    "name": "سکنجبین",
+    "type": "cold",
+    "description": "نوشیدنی سنتی ایرانی از سرکه و عسل، مناسب تابستان.",
+    "imageUrl": "https://via.placeholder.com/300x200?text=Sekanjebin",
+    "price": 45000,
+    "favorite": true,
+    "region": "Tehran"
+  },
+  {
+    "id": "2",
+    "name": "عرق نعنا",
+    "type": "herbal",
+    "description": "عرق گیاهی برای هضم غذا و رفع نفخ.",
+    "imageUrl": "https://via.placeholder.com/300x200?text=Nana",
+    "price": 35000,
+    "favorite": false,
+    "region": "Shiraz"
+  },
+  {
+    "id": "3",
+    "name": "دوغ سنتی",
+    "type": "fermented",
+    "description": "دوغ سنتی با نعنا خشک و نمک، مناسب همراه غذا.",
+    "imageUrl": "https://via.placeholder.com/300x200?text=Doogh",
+    "price": 30000,
+    "favorite": true,
+    "region": "Yazd"
+  }
+]
