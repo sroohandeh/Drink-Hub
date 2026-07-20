@@ -1,0 +1,31 @@
+<div class="min-h-screen flex flex-col bg-slate-100">
+  <!-- Header -->
+  <header class="bg-white shadow-sm">
+    <div class="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="inline-block h-8 w-8 rounded-full bg-brand"></span>
+        <span class="font-semibold text-lg text-slate-800"> Persian Drinks Hub </span>
+      </div>
+
+      <nav class="flex gap-4 text-sm">
+        <a routerLink="/" class="text-slate-600 hover:text-slate-900 cursor-pointer">Home</a>
+        <a [routerLink]="'/drinks'" class="text-slate-600 hover:text-slate-900 cursor-pointer">Drinks</a>
+        <a routerLink="/admin" class="text-slate-600 hover:text-slate-900 cursor-pointer">Admin</a>
+        <a routerLink="/login" class="text-slate-600 hover:text-slate-900 cursor-pointer">Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <main class="flex-1 mx-auto max-w-6xl px-4 py-6">
+    <router-outlet></router-outlet>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t">
+    <div class="mx-auto max-w-6xl px-4 py-3 text-xs text-slate-500 flex justify-between">
+      <span>© {{ year }} Persian Drinks Hub</span>
+      <span>Built with Angular 18 + Tailwind</span>
+    </div>
+  </footer>
+</div>
