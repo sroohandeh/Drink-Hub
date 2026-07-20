@@ -1,0 +1,16 @@
+<section>
+  <h1 class="text-2xl font-semibold mb-4 text-slate-800">نوشیدنی‌های سنتی ایرانی</h1>
+
+  <p class="text-slate-500 mb-6">
+    این صفحه فعلاً اسکلت اولیه است؛ در قدم بعدی لیست واقعی نوشیدنی‌ها و فیلترها را با سیگنال‌ها و
+    HTTP اضافه می‌کنیم.
+  </p>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    @if (!hasData()) {
+      <div class="col-span-full text-center text-slate-400">
+        فعلاً داده‌ای نداریم، ولی ساختار آماده است.
+      </div>
+    }
+  </div>
+</section>
