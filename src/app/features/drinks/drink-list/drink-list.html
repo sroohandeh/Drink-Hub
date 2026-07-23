@@ -1,16 +1,55 @@
-<section>
-  <h1 class="text-2xl font-semibold mb-4 text-slate-800">نوشیدنی‌های سنتی ایرانی</h1>
+<section class="space-y-4">
+  <header class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+    <div>
+      <h1 class="text-2xl font-semibold text-slate-800">نوشیدنی‌های سنتی ایرانی</h1>
+    </div>
 
-  <p class="text-slate-500 mb-6">
-    این صفحه فعلاً اسکلت اولیه است؛ در قدم بعدی لیست واقعی نوشیدنی‌ها و فیلترها را با سیگنال‌ها و
-    HTTP اضافه می‌کنیم.
-  </p>
+    <div class="flex flex-col sm:flex-row gap-2 sm:items-center">
+      <input
+        type="text"
+        class="border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand"
+        placeholder="جست‌وجو بر اساس نام"
+        [value]="search()"
+        (input)="search.set(($any($event.target).value ?? '').toString())"
+      />
 
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-    @if (!hasData()) {
-      <div class="col-span-full text-center text-slate-400">
-        فعلاً داده‌ای نداریم، ولی ساختار آماده است.
-      </div>
-    }
-  </div>
+      <button
+        type="button"
+        class="text-xs px-3 py-2 rounded-lg border cursor-pointer"
+        [ngClass]="
+          showFavorites()
+            ? 'bg-brand text-white border-brand'
+            : 'text-slate-600 border-slate-300 bg-white'
+        "
+        (click)="toggleFavorites()"
+      >
+        فقط علاقه‌مندی‌ها
+      </button>
+    </div>
+  </header>
+
+  <!-- Loading state -->
+  @if (loading()) {
+    <div class="mt-6 text-center text-slate-500">در حال بارگذاری نوشیدنی‌ها...</div>
+  }
+
+  <!-- Error state -->
+  @if (error()) {
+    <div class="mt-6 text-center text-red-500 text-sm">خطا در گرفتن داده‌ها: {{ error() }}</div>
+  }
+
+  <!-- List -->
+  @if (!loading() && !error()) {
+    <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      @if (filteredDrinks().length === 0) {
+        <div class="col-span-full text-center text-slate-400 text-sm">
+          هیچ نوشیدنی مطابق جست‌وجو پیدا نشد.
+        </div>
+      } @else {
+        @for (drink of filteredDrinks(); track drink.id) {
+          <app-drink-card [drink]="drink" (toggleFavorite)="onToggleFavorite($event)" />
+        }
+      }
+    </div>
+  }
 </section>

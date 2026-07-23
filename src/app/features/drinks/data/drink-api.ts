@@ -8,7 +8,7 @@ import { Drink } from '../../../shared/models/drink';
 })
 export class DrinkApi {
   private http = inject(HttpClient);
-  private baseUrl = 'assets/mock/drinks.json';
+  private baseUrl = 'assets/mocks/drinks.json';
 
   getDrinks(): Observable<Drink[]> {
     return this.http.get<Drink[]>(this.baseUrl).pipe(
