@@ -2,16 +2,25 @@
   <!-- Header -->
   <header class="bg-white shadow-sm">
     <div class="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
-      <div class="flex items-center gap-2">
-        <span class="inline-block h-8 w-8 rounded-full bg-brand"></span>
-        <span class="font-semibold text-lg text-slate-800"> Persian Drinks Hub </span>
+      <div class="flex items-center gap-4">
+        <span class="font-semibold text-lg text-slate-800"
+          ><img src="../../../../assets/logo/logo.png" class="w-25"
+        /></span>
+        <div class="flex gap-8 menu">
+          <a routerLink="/" class="text-slate-600 hover:text-slate-900 cursor-pointer">خانه</a>
+          <a [routerLink]="'/drinks'" class="text-slate-600 hover:text-slate-900 cursor-pointer"
+            >نوشیدنی ها</a
+          >
+        </div>
       </div>
 
-      <nav class="flex gap-4 text-sm">
-        <a routerLink="/" class="text-slate-600 hover:text-slate-900 cursor-pointer">Home</a>
-        <a [routerLink]="'/drinks'" class="text-slate-600 hover:text-slate-900 cursor-pointer">Drinks</a>
-        <a routerLink="/admin" class="text-slate-600 hover:text-slate-900 cursor-pointer">Admin</a>
-        <a routerLink="/login" class="text-slate-600 hover:text-slate-900 cursor-pointer">Login</a>
+      <nav class="flex gap-4 text-sm items-center">
+        <a
+          routerLink="/login"
+          class="flex items-center justify-center text-slate-700 bg-red-200 rounded-sm w-30 h-10 hover:text-white hover:bg-red-800 cursor-pointer transition-colors"
+        >
+          ورود | ثبت نام
+        </a>
       </nav>
     </div>
   </header>
