@@ -1,4 +1,4 @@
-<section class="space-y-4">
+<section class="space-y-4 min-w-fit w-[600px]">
   <button
     type="button"
     (click)="goBack()"
@@ -26,15 +26,12 @@
               <h1 class="text-2xl font-semibold text-slate-800 dark:text-slate-100">
                 {{ drink()!.name }}
               </h1>
-              <p class="text-xs text-slate-500 dark:text-slate-300 mt-1">
-                نوع: {{ drink()!.type }} – منطقه: {{ drink()!.region }}
-              </p>
             </div>
 
             <span
               class="text-sm px-3 py-1 rounded-full border"
               [ngClass]="{
-                'bg-brand text-white border-brand': drink()!.favorite,
+                'bg-red-800 text-white border-brand': drink()!.favorite,
                 'text-slate-600 border-slate-300 bg-white': !drink()!.favorite,
               }"
             >
@@ -51,7 +48,7 @@
               {{ drink()!.price }} تومان
             </span>
 
-            <a routerLink="/drinks" class="text-sm text-brand hover:underline cursor-pointer">
+            <a routerLink="/drinks" class="text-sm text-brand hover:text-red-800 cursor-pointer">
               دیدن سایر نوشیدنی‌ها
             </a>
           </div>
