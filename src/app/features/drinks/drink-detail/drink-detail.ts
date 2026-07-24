@@ -1,11 +1,11 @@
 import { Component, inject, signal } from '@angular/core';
 import { Drink } from '../../../shared/models/drink';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-drink-detail',
-  imports: [NgClass],
+  imports: [NgClass, RouterLink],
   templateUrl: './drink-detail.html',
   styleUrl: './drink-detail.css',
 })
