@@ -4,6 +4,7 @@ import { MainLayout } from './core/layout/main-layout/main-layout';
 import { DrinkList } from './features/drinks/drink-list/drink-list';
 import { drinkResolver } from './features/drinks/data/drink-resolver';
 import { DrinkDetail } from './features/drinks/drink-detail/drink-detail';
+import { Login } from './features/auth/ui/login/login';
 
 export const routes: Routes = [
   {
@@ -21,6 +22,7 @@ export const routes: Routes = [
         resolve: { drink: drinkResolver },
         data: { title: 'جزییات نوشیدنی', requiresAuth: false },
       },
+      {path: 'login', component: Login}
     ],
   },
 ];

@@ -1,0 +1,37 @@
+<div class="max-w-md mx-auto bg-white rounded-xl shadow p-6 border border-slate-200">
+  <h1 class="text-2xl font-semibold mb-6">Login</h1>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-4">
+    <div>
+      <label class="block text-sm mb-1">Email</label>
+      <input class="w-full border rounded px-3 py-2" formControlName="email" />
+      @if (form.controls.email.touched && form.controls.email.invalid) {
+        <p class="text-xs text-red-500 mt-1">Email معتبر وارد کنید</p>
+      }
+    </div>
+
+    <div>
+      <label class="block text-sm mb-1">Password</label>
+      <input type="password" class="w-full border rounded px-3 py-2" formControlName="password" />
+      @if (form.controls.password.touched && form.controls.password.invalid) {
+        <p class="text-xs text-red-500 mt-1">Password حداقل 6 کاراکتر باشد</p>
+      }
+    </div>
+
+    <button
+      type="submit"
+      class="w-full bg-red-800 text-white rounded px-4 py-2 disabled:opacity-50 cursor-pointer"
+      [disabled]="form.invalid || loading()"
+    >
+      @if (loading()) {
+        در حال ورود...
+      } @else {
+        ورود
+      }
+    </button>
+
+    @if (error()) {
+      <p class="text-sm text-red-600">{{ error() }}</p>
+    }
+  </form>
+</div>
