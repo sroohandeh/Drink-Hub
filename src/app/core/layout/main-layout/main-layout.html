@@ -13,15 +13,18 @@
           >
         </div>
       </div>
-
-      <nav class="flex gap-4 text-sm items-center">
-        <a
-          routerLink="/login"
-          class="flex items-center justify-center text-slate-700 bg-red-200 rounded-sm w-30 h-10 hover:text-white hover:bg-red-800 cursor-pointer transition-colors"
-        >
-          ورود | ثبت نام
-        </a>
-      </nav>
+      @if (!isLoggedIn) {
+        <nav class="flex gap-4 text-sm items-center">
+          <a
+            routerLink="/login"
+            class="flex items-center justify-center text-slate-700 bg-red-200 rounded-sm w-30 h-10 hover:text-white hover:bg-red-800 cursor-pointer transition-colors"
+          >
+            ورود | ثبت نام
+          </a>
+        </nav>
+      } @else {
+        <p>{{user?.name}}</p>
+      }
     </div>
   </header>
 
