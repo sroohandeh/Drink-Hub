@@ -5,6 +5,7 @@ import { DrinkList } from './features/drinks/drink-list/drink-list';
 import { drinkResolver } from './features/drinks/data/drink-resolver';
 import { DrinkDetail } from './features/drinks/drink-detail/drink-detail';
 import { Login } from './features/auth/ui/login/login';
+import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -16,11 +17,12 @@ export const routes: Routes = [
         path: 'drinks',
         component: DrinkList,
       },
-      {
-        path: 'drink/:id',
+       {
+        path: 'drinks/:id',
         component: DrinkDetail,
         resolve: { drink: drinkResolver },
-        data: { title: 'جزییات نوشیدنی', requiresAuth: false },
+        canActivate: [authGuard],
+        data: { title: 'جزئیات نوشیدنی', requiresAuth: true },
       },
       {path: 'login', component: Login}
     ],

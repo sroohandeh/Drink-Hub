@@ -1,10 +1,11 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { selectError, selectLoading } from '../../stores/auth.selectors';
+import { selectError, selectIsLoggedIn, selectLoading } from '../../stores/auth.selectors';
 import { AuthActions } from '../../stores/auth.action';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,9 @@ import { Router } from '@angular/router';
 export class Login {
   private fb = inject(FormBuilder);
   private store = inject(Store);
-  router = inject(Router);
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
+  private destroyRef = inject(DestroyRef);
 
   loading = signal(false);
   error = signal<string | null>(null);
@@ -26,16 +29,31 @@ export class Login {
   });
 
   ngOnInit() {
-    this.store.select(selectLoading).subscribe(v => this.loading.set(v));
-    this.store.select(selectError).subscribe(v => this.error.set(v));
+    this.store
+      .select(selectLoading)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((v) => this.loading.set(v));
+
+    this.store
+      .select(selectError)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((v) => this.error.set(v));
+
+    this.store
+      .select(selectIsLoggedIn)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((isLoggedIn) => {
+        if (isLoggedIn) {
+          const redirectTo = this.route.snapshot.queryParamMap.get('redirectTo') || '/drinks';
+          this.router.navigateByUrl(redirectTo);
+        }
+      });
   }
 
   submit() {
     if (this.form.invalid) return;
+
     const { email, password } = this.form.getRawValue();
     this.store.dispatch(AuthActions.login({ email: email!, password: password! }));
-    this.router.navigate(['/'])
-
-}
-
+  }
 }

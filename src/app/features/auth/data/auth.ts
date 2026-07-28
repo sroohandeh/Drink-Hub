@@ -16,7 +16,7 @@ export class Auth {
     const response: LoginResponse = {
       user: {
         id: '1',
-        name: 'Admin User',
+        name: 'Admin',
         email: body.email,
         role: 'admin',
       },
