@@ -3,10 +3,11 @@ import { DrinkCard } from '../../../shared/ui/drink-card/drink-card';
 import { Drink } from '../../../shared/models/drink';
 import { DrinkApi } from '../data/drink-api';
 import { NgClass } from '@angular/common';
+import { InfiniteScroll } from '../../../shared/directives/infinite-scroll';
 
 @Component({
   selector: 'app-drink-list',
-  imports: [DrinkCard, NgClass],
+  imports: [DrinkCard, NgClass, InfiniteScroll],
   templateUrl: './drink-list.html',
   styleUrl: './drink-list.css',
 })
@@ -20,6 +21,9 @@ export class DrinkList {
   search = signal('');
   showFavorites = signal(false);
 
+  pageSize = signal(6);
+  pageStep = 6;
+
   filteredDrinks = computed(() => {
     const term = this.search().trim().toLowerCase();
     const onlyFav = this.showFavorites();
@@ -28,6 +32,15 @@ export class DrinkList {
       const matchesFav = !onlyFav || drink.favorite;
       return matchesName && matchesFav;
     });
+  });
+
+  visibleDrinks = computed(() => {
+    const all = this.filteredDrinks();
+    return all.slice(0, this.pageSize());
+  });
+
+  canShowMore = computed(() => {
+    return this.filteredDrinks().length > this.pageSize();
   });
 
   ngOnInit() {
@@ -46,11 +59,22 @@ export class DrinkList {
 
   toggleFavorites() {
     this.showFavorites.update((v) => !v);
+    this.pageSize.set(this.pageStep);
   }
 
   onToggleFavorite(drink: Drink) {
     this.drinks.update((list) =>
       list.map((d) => (d.id === drink.id ? { ...d, favorite: !d.favorite } : d)),
     );
+  }
+
+  onScrollEnd() {
+    if (this.canShowMore()) {
+      this.showMore();
+    }
+  }
+
+  showMore() {
+    this.pageSize.update((size) => size + this.pageStep);
   }
 }

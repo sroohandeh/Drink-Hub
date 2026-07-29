@@ -40,15 +40,32 @@
 
   <!-- List -->
   @if (!loading() && !error()) {
-    <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      @if (filteredDrinks().length === 0) {
-        <div class="col-span-full text-center text-slate-400 text-sm">
-          هیچ نوشیدنی مطابق جست‌وجو پیدا نشد.
-        </div>
-      } @else {
-        @for (drink of filteredDrinks(); track drink.id) {
-          <app-drink-card [drink]="drink" (toggleFavorite)="onToggleFavorite($event)" />
+    <div
+      class="mt-4 max-h-[600px] overflow-y-auto bg-white rounded-xl shadow-inner border border-slate-200 p-3 scrollbar-thin scrollbar-thumb-slate-300 scrollbar-track-slate-100"
+      appInfiniteScroll
+      (scrolledToEnd)="onScrollEnd()"
+    >
+      <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        @if (visibleDrinks().length === 0) {
+          <div class="col-span-full text-center text-slate-400 text-sm">
+            هیچ نوشیدنی مطابق جست‌وجو پیدا نشد.
+          </div>
+        } @else {
+          @for (drink of visibleDrinks(); track drink.id) {
+            <app-drink-card [drink]="drink" (toggleFavorite)="onToggleFavorite($event)" />
+          }
         }
+      </div>
+      @if (canShowMore()) {
+        <div class="mt-3 flex justify-center">
+          <button
+            type="button"
+            class="px-4 py-2 text-sm rounded-full border border-slate-300 text-slate-700 bg-white hover:bg-slate-50 shadow-sm transition transform hover:-translate-y-0.5 hover:shadow-md"
+            (click)="showMore()"
+          >
+            نمایش بیشتر نوشیدنی‌ها
+          </button>
+        </div>
       }
     </div>
   }
