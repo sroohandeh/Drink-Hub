@@ -38,14 +38,16 @@
               {{ drink()!.favorite ? 'مورد علاقه' : 'معمولی' }}
             </span>
           </div>
-
+          <p class="text-xs text-green-700 dark:text-slate-300 mt-1 bg-green-200 rounded-md p-1 w-fit">
+            نوع: {{ drink()!.type | drinkType }}
+          </p>
           <p class="text-sm text-slate-700 dark:text-slate-200 leading-relaxed">
             {{ drink()!.description }}
           </p>
 
           <div class="mt-auto flex items-center justify-between">
             <span class="text-lg font-semibold text-red-800 dark:text-slate-50">
-              {{ drink()!.price | price}} 
+              {{ drink()!.price | price }}
             </span>
 
             <a routerLink="/drinks" class="text-sm text-brand hover:text-red-800 cursor-pointer">

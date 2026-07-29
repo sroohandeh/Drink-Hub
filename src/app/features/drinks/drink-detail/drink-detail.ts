@@ -3,10 +3,11 @@ import { Drink } from '../../../shared/models/drink';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NgClass } from '@angular/common';
 import { PricePipe } from "../../../shared/pipes/price-pipe";
+import { DrinkTypePipe } from "../../../shared/pipes/drink-type-pipe";
 
 @Component({
   selector: 'app-drink-detail',
-  imports: [NgClass, RouterLink, PricePipe],
+  imports: [NgClass, RouterLink, PricePipe, DrinkTypePipe],
   templateUrl: './drink-detail.html',
   styleUrl: './drink-detail.css',
 })
