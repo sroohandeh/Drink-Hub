@@ -1,0 +1,53 @@
+<section class="max-w-xl mx-auto space-y-4">
+  <h1 class="text-2xl font-semibold text-slate-800 mb-2">تنظیمات اعلان‌ها</h1>
+  <app-card>
+    <ng-template #cardHeader>
+      <div class="flex items-center justify-between w-full">
+        <span class="font-semibold text-slate-800"> اعلان‌های نوشیدنی‌های جدید </span>
+      </div>
+    </ng-template>
+
+    <!-- Body -->
+    <ng-template #cardBody>
+      <div class="space-y-3 text-sm text-slate-700">
+        <p>
+          با فعال کردن اعلان‌ها، وقتی نوشیدنی جدیدی به لیست اضافه شود، یک <span class="bg-green-200 text-green-600 rounded-md p-1">notification</span> برای شما
+          ارسال می‌شود.
+        </p>
+
+        <label class="flex items-center gap-2">
+          <input type="checkbox" class="rounded border-slate-300" />
+          <span>اعلان برای نوشیدنی‌های جدید فعال شود</span>
+        </label>
+
+        <label class="flex items-center gap-2">
+          <input type="checkbox" class="rounded border-slate-300" />
+          <span>اعلان فقط برای نوشیدنی‌های مورد علاقه فعال شود</span>
+        </label>
+      </div>
+    </ng-template>
+
+    <!-- Footer -->
+    <ng-template #cardFooter>
+      <button
+        type="button"
+        class="px-4 py-2 text-xs rounded-full bg-green-600 cursor-pointer text-white shadow-sm hover:shadow-md hover:-translate-y-0.5 transition"
+      >
+        ذخیره تنظیمات
+      </button>
+    </ng-template>
+  </app-card>
+
+  <!-- <app-card>
+    <ng-template #cardHeader>
+      <span class="font-semibold text-orange-400">نکته</span>
+    </ng-template>
+
+    <ng-template #cardBody>
+      <p class="text-sm text-orange-600">
+        اگر مرورگر اجازه‌ی نمایش notification ندهد، ممکن است لازم باشد به‌صورت دستی در تنظیمات
+        مرورگر آن را فعال کنید.
+      </p>
+    </ng-template>
+  </app-card> -->
+</section>
