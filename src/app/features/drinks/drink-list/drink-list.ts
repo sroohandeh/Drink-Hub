@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { DrinkCard } from '../../../shared/ui/drink-card/drink-card';
 import { Drink } from '../../../shared/models/drink';
 import { DrinkApi } from '../data/drink-api';
@@ -23,6 +23,8 @@ export class DrinkList {
 
   pageSize = signal(6);
   pageStep = 6;
+
+  searchInput = viewChild<ElementRef<HTMLInputElement>>('searchInput');
 
   filteredDrinks = computed(() => {
     const term = this.search().trim().toLowerCase();
@@ -76,5 +78,11 @@ export class DrinkList {
 
   showMore() {
     this.pageSize.update((size) => size + this.pageStep);
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.searchInput()?.nativeElement.focus();
+    }, 0);
   }
 }
