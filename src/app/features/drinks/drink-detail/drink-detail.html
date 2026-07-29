@@ -45,7 +45,7 @@
 
           <div class="mt-auto flex items-center justify-between">
             <span class="text-lg font-semibold text-red-800 dark:text-slate-50">
-              {{ drink()!.price }} تومان
+              {{ drink()!.price | price}} 
             </span>
 
             <a routerLink="/drinks" class="text-sm text-brand hover:text-red-800 cursor-pointer">
