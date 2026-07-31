@@ -26,6 +26,15 @@ export const routes: Routes = [
       },
       { path: 'login', component: Login },
       { path: 'notifications', component: NotificationSettings },
+      {
+        path: 'admin',
+        canActivate: [authGuard],
+        loadComponent: () =>
+          import('./features/admin/admin-dashboard').then(
+            (m) => m.AdminDashboard,
+          ),
+        data: { title: 'Admin Dashboard' },
+      },
     ],
   },
 ];

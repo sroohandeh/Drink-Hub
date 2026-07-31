@@ -1,0 +1,64 @@
+<section class="space-y-6">
+  <header class="flex items-center justify-between">
+    <div>
+      <h1 class="text-2xl font-semibold text-slate-800">داشبورد ادمین</h1>
+    </div>
+  </header>
+
+  <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+    <div class="bg-white rounded-xl shadow-sm border border-blue-700 p-4">
+      <h2 class="text-sm font-semibold text-slate-700 mb-2">تعداد نوشیدنی‌ها</h2>
+      <p class="text-2xl font-bold text-blue-900">{{ totalDrinks }}</p>
+    </div>
+
+    <div class="bg-white rounded-xl shadow-sm border border-pink-700 p-4">
+      <h2 class="text-sm font-semibold text-slate-700 mb-2">نوشیدنی‌های مورد علاقه</h2>
+      <p class="text-2xl font-bold text-pink-900">{{ favoriteCount }}</p>
+    </div>
+
+    <div class="bg-white rounded-xl shadow-sm border border-green-700 p-4">
+      <h2 class="text-sm font-semibold text-slate-700 mb-2">نوشیدنی‌های گیاهی</h2>
+      <p class="text-2xl font-bold text-green-900">{{ herbalCount }}</p>
+    </div>
+  </div>
+
+  <!-- بخش سنگین با @defer -->
+  @defer (on viewport) {
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 mt-4">
+      <h2 class="text-sm font-semibold text-slate-700 mb-4">لیست کامل نوشیدنی‌ها</h2>
+
+      <table class="w-full text-sm border-collapse">
+        <thead>
+          <tr class="border-b border-slate-200">
+            <th class="py-2 px-1">نام</th>
+            <th class="py-2 px-1">نوع</th>
+            <th class="py-2 px-1">قیمت</th>
+            <th class="py-2 px-1">مورد علاقه</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (drink of drinks(); track drink.id) {
+            <tr class="border-b border-slate-100 hover:bg-slate-50 text-center">
+              <td class="py-1 px-1">{{ drink.name }}</td>
+              <td class="py-1 px-1">{{ drink.type }}</td>
+              <td class="py-1 px-1">{{ drink.price | price }}</td>
+              <td class="py-1 px-1">
+                {{ drink.favorite ? 'بله' : 'خیر' }}
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  } @placeholder {
+    <div
+      class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 mt-4 text-sm text-slate-500"
+    >
+      در حال آماده‌سازی جدول مدیریت نوشیدنی‌ها...
+    </div>
+  } @error {
+    <div class="bg-red-50 rounded-xl border border-red-200 p-4 mt-4 text-sm text-red-700">
+      مشکلی در بارگذاری جدول مدیریت نوشیدنی‌ها پیش آمد.
+    </div>
+  }
+</section>
