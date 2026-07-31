@@ -5,35 +5,38 @@
       <div class="flex items-center gap-2">
         <span class="inline-block h-8 w-8 rounded-full bg-brand"></span>
         <img src="../../../../assets/logo/logo.png" class="w-20" alt="" />
+        <nav class="flex gap-4 text-sm items-center">
+          <a routerLink="/drinks" class="text-slate-600 hover:text-slate-900"> نوشیدنی ها </a>
+
+          @if (isAdmin()) {
+            <a routerLink="/admin" class="text-slate-600 hover:text-slate-900"> Admin </a>
+          }
+          <a
+            routerLink="/notifications"
+            routerLinkActive="text-slate-900"
+            class="text-slate-600 hover:text-slate-900"
+          >
+            تنظیمات
+          </a>
+        </nav>
       </div>
 
-      <nav class="flex gap-4 text-sm items-center">
-        <a routerLink="/drinks" class="text-slate-600 hover:text-slate-900"> نوشیدنی ها </a>
-        <a
-          routerLink="/notifications"
-          routerLinkActive="text-slate-900"
-          class="text-slate-600 hover:text-slate-900"
-        >
-          تنظیمات
-        </a>
-
-        @if (!isLoggedIn()) {
-          <a routerLink="/login" class="text-slate-600 hover:text-slate-900"> ورود </a>
-        } @else {
-          <div class="flex items-center gap-3">
-            <span class="text-xs text-slate-500">
-              <span class="font-medium text-slate-800">{{ userName() }}</span>
-            </span>
-            <button
-              type="button"
-              (click)="logout()"
-              class="text-xs px-2 py-1 rounded border border-slate-300 text-slate-600 hover:bg-slate-100 cursor-pointer"
-            >
-              خروج
-            </button>
-          </div>
-        }
-      </nav>
+      @if (!isLoggedIn()) {
+        <a routerLink="/login" class="text-slate-600 hover:text-slate-900"> ورود </a>
+      } @else {
+        <div class="flex items-center gap-3">
+          <span class="text-xs text-slate-500">
+            <span class="font-medium text-slate-800">{{ userName() }}</span>
+          </span>
+          <button
+            type="button"
+            (click)="logout()"
+            class="text-xs px-2 py-1 rounded border border-slate-300 text-slate-600 hover:bg-slate-100 cursor-pointer"
+          >
+            خروج
+          </button>
+        </div>
+      }
     </div>
   </header>
 

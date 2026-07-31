@@ -18,6 +18,8 @@ export class MainLayout implements OnInit {
   year = new Date().getFullYear();
   isLoggedIn = signal(false);
   userName = signal<string>('مهمان');
+  userRole = signal<'user' | 'admin' | null>(null);
+
   private router = inject(Router);
   private store = inject(Store);
   private destroyRef = inject(DestroyRef);
@@ -34,7 +36,12 @@ export class MainLayout implements OnInit {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((user) => {
         this.userName.set(user ? user.name : 'مهمان');
+        this.userRole.set(user ? user.role : null);
       });
+  }
+
+  isAdmin(): boolean {
+    return this.userRole() === 'admin';
   }
 
   logout() {
