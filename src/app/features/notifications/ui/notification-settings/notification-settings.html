@@ -1,53 +1,58 @@
 <section class="max-w-xl mx-auto space-y-4">
   <h1 class="text-2xl font-semibold text-slate-800 mb-2">تنظیمات اعلان‌ها</h1>
+  <p class="text-sm text-slate-600 mb-4">
+    این صفحه هم تنظیمات اعلان را دارد، هم یک دکمه برای تست نوتیفیکیشن «نوشیدنی جدید اضافه شد».
+  </p>
+
   <app-card>
     <ng-template #cardHeader>
       <div class="flex items-center justify-between w-full">
         <span class="font-semibold text-slate-800"> اعلان‌های نوشیدنی‌های جدید </span>
+        <span class="text-xs text-slate-500"> Persian Drinks Hub </span>
       </div>
     </ng-template>
 
-    <!-- Body -->
     <ng-template #cardBody>
       <div class="space-y-3 text-sm text-slate-700">
         <p>
-          با فعال کردن اعلان‌ها، وقتی نوشیدنی جدیدی به لیست اضافه شود، یک <span class="bg-green-200 text-green-600 rounded-md p-1">notification</span> برای شما
-          ارسال می‌شود.
+          با فعال کردن اعلان‌ها، وقتی نوشیدنی جدیدی اضافه شود، می‌توانید یک نوتیفیکیشن روی دستگاه
+          ببینید.
         </p>
 
-        <label class="flex items-center gap-2">
-          <input type="checkbox" class="rounded border-slate-300" />
-          <span>اعلان برای نوشیدنی‌های جدید فعال شود</span>
-        </label>
+        <button
+          type="button"
+          class="px-4 py-2 text-xs rounded-full bg-red-800 text-white shadow-sm hover:shadow-md hover:-translate-y-0.5 transition cursor-pointer"
+          (click)="enableNotifications()"
+        >
+          فعال‌سازی اعلان‌ها
+        </button>
 
-        <label class="flex items-center gap-2">
-          <input type="checkbox" class="rounded border-slate-300" />
-          <span>اعلان فقط برای نوشیدنی‌های مورد علاقه فعال شود</span>
-        </label>
+        @if (status()) {
+          <p class="text-xs text-green-700 mt-2">
+            {{ status() }}
+          </p>
+        }
       </div>
     </ng-template>
 
-    <!-- Footer -->
     <ng-template #cardFooter>
       <button
         type="button"
-        class="px-4 py-2 text-xs rounded-full bg-green-600 cursor-pointer text-white shadow-sm hover:shadow-md hover:-translate-y-0.5 transition"
+        class="px-4 py-2 text-xs rounded-full bg-slate-800 text-white shadow-sm hover:shadow-md hover:-translate-y-0.5 transition cursor-pointer"
+        (click)="testNewDrinkNotification()"
       >
-        ذخیره تنظیمات
+        تست نوتیفیکیشن «نوشیدنی جدید اضافه شد»
+      </button>
+    </ng-template>
+
+    <ng-template #cardFooter>
+      <button
+        type="button"
+        class="px-4 py-2 text-xs mt-2 rounded-full bg-slate-500 text-white cursor-pointer"
+        (click)="subscribeToPush()"
+      >
+        subscribe to Web Push (demo)
       </button>
     </ng-template>
   </app-card>
-
-  <!-- <app-card>
-    <ng-template #cardHeader>
-      <span class="font-semibold text-orange-400">نکته</span>
-    </ng-template>
-
-    <ng-template #cardBody>
-      <p class="text-sm text-orange-600">
-        اگر مرورگر اجازه‌ی نمایش notification ندهد، ممکن است لازم باشد به‌صورت دستی در تنظیمات
-        مرورگر آن را فعال کنید.
-      </p>
-    </ng-template>
-  </app-card> -->
 </section>
