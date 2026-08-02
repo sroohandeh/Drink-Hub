@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { delay, map, Observable } from 'rxjs';
 import { Drink } from '../../../shared/models/drink';
 
@@ -8,7 +9,13 @@ import { Drink } from '../../../shared/models/drink';
 })
 export class DrinkApi {
   private http = inject(HttpClient);
-  private baseUrl = 'assets/mocks/drinks.json';
+  private platformId = inject(PLATFORM_ID);
+
+  private get baseUrl(): string {
+    return isPlatformBrowser(this.platformId)
+      ? 'assets/mocks/drinks.json'
+      : '/assets/mocks/drinks.json';
+  }
 
   getDrinks(): Observable<Drink[]> {
     return this.http.get<Drink[]>(this.baseUrl).pipe(
