@@ -5,6 +5,7 @@ import {
   writeResponseToNodeResponse,
 } from '@angular/ssr/node';
 import express from 'express';
+import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 const browserDistFolder = join(import.meta.dirname, '../browser');
@@ -34,6 +35,8 @@ app.use(
     redirect: false,
   }),
 );
+
+-
 
 app.use((req, res, next) => {
   if (req.headers.host && req.headers.host.includes(':')) {

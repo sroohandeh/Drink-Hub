@@ -1,12 +1,23 @@
-import { inject, Injectable } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Inject, inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { SwPush } from '@angular/service-worker';
 
 @Injectable({
   providedIn: 'root',
 })
 export class Notification {
-  private swPush = inject(SwPush);
+    private swPush = inject(SwPush);
+  private isBrowser: boolean;
+
+  constructor(@Inject(PLATFORM_ID) platformId: object) {
+    this.isBrowser = isPlatformBrowser(platformId);
+  }
+
   async requestPermission(): Promise<boolean> {
+    if (!this.isBrowser) {
+      return false;
+    }
+
     const notificationObj = (window as any).Notification;
 
     if (!notificationObj) {
@@ -19,8 +30,11 @@ export class Notification {
   }
 
   showLocalNotification(title: string, body: string) {
-    const win = window as any;
+    if (!this.isBrowser) {
+      return;
+    }
 
+    const win = window as any;
     if (!('Notification' in win)) {
       return;
     }
@@ -36,7 +50,6 @@ export class Notification {
     });
   }
 
-  // آماده‌سازی برای Web Push (backend لازم دارد)
   async subscribeToPush(serverPublicKey: string): Promise<PushSubscription | null> {
     if (!this.swPush.isEnabled) {
       console.warn('Service worker / Push is not enabled.');
